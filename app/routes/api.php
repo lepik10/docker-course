@@ -18,7 +18,7 @@ Route::delete('/tasks/{task}', [TaskController::class, 'destroy']);
 
 Route::get('/version', function () {
     return [
-        'version' => '2.0.0',
+        'version' => '2.1.0',
         'environment' => app()->environment(),
     ];
 });
