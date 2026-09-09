@@ -22,6 +22,7 @@ Route::get('/version', function () {
     return [
         'version' => '3.0.0',
         'environment' => app()->environment(),
+        'hostname' => gethostname(),
     ];
 });
 
