@@ -1,0 +1,32 @@
+services:
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./app:/var/www
+    environment:
+      DB_CONNECTION: pgsql
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_DATABASE: app
+      DB_USERNAME: app
+      DB_PASSWORD: secret
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+    depends_on:
+      - postgres
+      - redis
+
+  postgres:
+    image: postgres:18
+    environment:
+      POSTGRES_DB: app
+      POSTGRES_USER: app
+      POSTGRES_PASSWORD: secret
+
+  redis:
+    image: redis:8

@@ -1,0 +1,6 @@
+.env
+.env.*
+
+bad-request.json
+request.json
+update.json
