@@ -5,6 +5,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TaskController;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redis;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -21,4 +23,16 @@ Route::get('/version', function () {
         'version' => '2.1.0',
         'environment' => app()->environment(),
     ];
+});
+
+Route::get('/health', function () {
+    DB::connection()->getPdo();
+
+    Redis::ping();
+
+    return response()->json([
+        'status' => 'ok',
+        'database' => 'ok',
+        'redis' => 'ok',
+    ]);
 });

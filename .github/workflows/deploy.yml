@@ -21,4 +21,4 @@ jobs:
             git pull origin master
             docker compose -f compose.production.yaml build app
             docker compose -f compose.production.yaml up -d
-            curl --fail http://localhost:8080/api/version
+            curl --fail http://localhost:8080/api/health
