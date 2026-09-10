@@ -22,7 +22,6 @@ jobs:
             docker compose -f compose.production.yaml build app
             docker compose -f compose.production.yaml up -d
             docker compose -f compose.production.yaml exec app php artisan migrate --force
-            
             for i in {1..10}; do
               if curl --fail --silent --show-error http://localhost:8080/api/health; then
                 exit 0
@@ -31,6 +30,5 @@ jobs:
               echo "Health check failed, retrying..."
               sleep 2
             done
-
             echo "Health check failed after 10 attempts"
             exit 1
